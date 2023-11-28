@@ -10,4 +10,8 @@ export interface Product {
 export interface ProductsContextType {
   products: Product[];
   categories: string[];
+  electronics: Product[];
+  jewelery: Product[];
+  mensClothing: Product[];
+  womansClothing: Product[];
 }

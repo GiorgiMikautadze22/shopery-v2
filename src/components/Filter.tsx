@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import FilterIcon from "../Images/Filter 24px (1).svg";
 import { useProductContext } from "../Context";
 import RangeSlider from "./RangeSlider";
+import { Product } from "../Types";
 
 const FilterButton = styled.button`
   width: 130px;
@@ -22,7 +23,32 @@ const FilterButton = styled.button`
 const Line = styled.div``;
 
 const Filter = () => {
-  const { categories } = useProductContext();
+  const { categories, electronics, jewelery, mensClothing, womansClothing } =
+    useProductContext();
+
+  // const [electronics, setElectronics] = useState<Product[]>([]);
+  // const [jewelery, setJewelery] = useState<Product[]>([]);
+  // const [mensClothing, setMensClothing] = useState<Product[]>([]);
+  // const [womansClothing, setWomansClothing] = useState<Product[]>([]);
+
+  // useEffect(() => {
+  //   categories.map((item) => {
+  //     fetch(`https://fakestoreapi.com/products/category/${item}`)
+  //       .then((res) => res.json())
+  //       .then((json) => {
+  //         if (item === "electronics") {
+  //           setElectronics(json);
+  //         } else if (item === "jewelery") {
+  //           setJewelery(json);
+  //         } else if (item === "men's clothing") {
+  //           setMensClothing(json);
+  //         } else {
+  //           setWomansClothing(json);
+  //         }
+  //       });
+  //   });
+  // }, [categories]);
+
   return (
     <div>
       <FilterButton>
@@ -34,6 +60,15 @@ const Filter = () => {
         <div style={{ display: "flex", gap: "10px" }}>
           <input type="checkbox" />
           <p>{category}</p>
+          {category === "electronics" ? (
+            <p>({electronics.length})</p>
+          ) : category === "jewelery" ? (
+            <p>({jewelery.length})</p>
+          ) : category === "men's clothing" ? (
+            <p>({mensClothing.length})</p>
+          ) : category === "women's clothing" ? (
+            <p>({womansClothing.length})</p>
+          ) : null}
         </div>
       ))}
 
