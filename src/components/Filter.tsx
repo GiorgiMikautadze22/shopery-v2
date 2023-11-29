@@ -23,42 +23,33 @@ const FilterButton = styled.button`
 const Line = styled.div``;
 
 const Filter = () => {
-  const { categories, electronics, jewelery, mensClothing, womansClothing } =
-    useProductContext();
-
-  // const [electronics, setElectronics] = useState<Product[]>([]);
-  // const [jewelery, setJewelery] = useState<Product[]>([]);
-  // const [mensClothing, setMensClothing] = useState<Product[]>([]);
-  // const [womansClothing, setWomansClothing] = useState<Product[]>([]);
-
-  // useEffect(() => {
-  //   categories.map((item) => {
-  //     fetch(`https://fakestoreapi.com/products/category/${item}`)
-  //       .then((res) => res.json())
-  //       .then((json) => {
-  //         if (item === "electronics") {
-  //           setElectronics(json);
-  //         } else if (item === "jewelery") {
-  //           setJewelery(json);
-  //         } else if (item === "men's clothing") {
-  //           setMensClothing(json);
-  //         } else {
-  //           setWomansClothing(json);
-  //         }
-  //       });
-  //   });
-  // }, [categories]);
+  const {
+    categories,
+    electronics,
+    jewelery,
+    mensClothing,
+    womansClothing,
+    filteredProducts,
+    selectedCategory,
+    setSelectedCategory,
+    value,
+    prices,
+  } = useProductContext();
 
   return (
     <div>
-      <FilterButton>
+      <FilterButton onClick={() => filteredProducts()}>
         Filter
         <img src={FilterIcon} alt="filter icon" />
       </FilterButton>
       <h2>All Categories</h2>
       {categories.map((category) => (
         <div style={{ display: "flex", gap: "10px" }}>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={selectedCategory === category}
+            onChange={() => setSelectedCategory(category)}
+          />
           <p>{category}</p>
           {category === "electronics" ? (
             <p>({electronics.length})</p>
@@ -76,7 +67,10 @@ const Filter = () => {
       <h2>Price</h2>
       <RangeSlider />
       <p>
-        Price: <label> 50 - 1500</label>
+        Price:{" "}
+        <span style={{ fontWeight: "600", marginTop: "10px" }}>
+          {value[0]} - {value[1]}
+        </span>
       </p>
     </div>
   );

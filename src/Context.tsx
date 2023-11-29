@@ -23,6 +23,57 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [mensClothing, setMensClothing] = useState<Product[]>([]);
   const [womansClothing, setWomansClothing] = useState<Product[]>([]);
 
+  const [selectedCategory, setSelectedCategory] = useState<string>();
+
+  const [value, setValue] = useState<number[]>([]);
+  const [highestPrice, setHighestPrice] = useState(Number);
+  const [lowestPrice, setLowestPrice] = useState(Number);
+  const [prices, setPrices] = useState<number[]>([]);
+
+  useEffect(() => {
+    setPrices(products.map((product) => product.price));
+    const max = Math.max(...prices);
+    const min = Math.min(...prices);
+    setHighestPrice(max);
+    setLowestPrice(min);
+
+    setValue([min, max]);
+  }, [products]);
+
+  // useEffect(() => {
+  //   setValue([lowestPrice, highestPrice]);
+  // }, [lowestPrice, highestPrice]);
+
+  const calcMax = () => {};
+
+  const filteredProducts = () => {
+    const priceFiltered = products.filter(
+      (product) => product.price >= value[0] && product.price <= value[1]
+    );
+    setProducts(priceFiltered);
+
+    switch (selectedCategory) {
+      case "electronics":
+        setProducts(electronics);
+
+        break;
+      case "jewelery":
+        setProducts(jewelery);
+
+        break;
+      case "men's clothing":
+        setProducts(mensClothing);
+
+        break;
+      case "women's clothing":
+        setProducts(womansClothing);
+
+        break;
+      default:
+        setProducts(products);
+    }
+  };
+
   useEffect(() => {
     categories.map((item) => {
       fetch(`https://fakestoreapi.com/products/category/${item}`)
@@ -51,6 +102,9 @@ export function ProductProvider({ children }: ProductProviderProps) {
       .then((json) => setCategories(json));
   }, []);
 
+  const getMaxPrice = () => highestPrice;
+  const getMinPrice = () => lowestPrice;
+
   const contextValue: ProductsContextType = {
     products,
     categories,
@@ -58,6 +112,16 @@ export function ProductProvider({ children }: ProductProviderProps) {
     jewelery,
     mensClothing,
     womansClothing,
+    filteredProducts,
+    selectedCategory,
+    setSelectedCategory,
+    value,
+    highestPrice,
+    lowestPrice,
+    setValue,
+    prices,
+    getMaxPrice,
+    getMinPrice,
   };
 
   return (

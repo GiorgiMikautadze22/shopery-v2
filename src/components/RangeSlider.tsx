@@ -1,13 +1,21 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import { useProductContext } from "../Context";
 
 function valuetext(value: number) {
   return `${value}°C`;
 }
 
 export default function RangeSlider() {
-  const [value, setValue] = React.useState<number[]>([20, 37]);
+  const {
+    value,
+    setValue,
+    highestPrice,
+    lowestPrice,
+    getMaxPrice,
+    getMinPrice,
+  } = useProductContext();
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
@@ -16,11 +24,14 @@ export default function RangeSlider() {
   return (
     <Box sx={{ width: 300 }}>
       <Slider
-        getAriaLabel={() => "Temperature range"}
+        getAriaLabel={() => "Price range"}
         value={value}
         onChange={handleChange}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
+        color="primary"
+        max={getMaxPrice()}
+        min={getMinPrice()}
       />
     </Box>
   );
