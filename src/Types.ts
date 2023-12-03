@@ -18,10 +18,8 @@ export interface ProductsContextType {
   selectedCategory: string | undefined;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string | undefined>>;
   value: number[];
-  highestPrice: number;
-  lowestPrice: number;
   setValue: React.Dispatch<React.SetStateAction<number[]>>;
-  prices: number[];
-  getMaxPrice: () => number;
-  getMinPrice: () => number;
+  headerCategoryIndicator: string | undefined;
+  selectedProduct: Product | undefined;
+  setSelectedProduct: React.Dispatch<React.SetStateAction<Product | undefined>>;
 }

@@ -17,6 +17,7 @@ interface ProductProviderProps {
 
 export function ProductProvider({ children }: ProductProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [electronics, setElectronics] = useState<Product[]>([]);
   const [jewelery, setJewelery] = useState<Product[]>([]);
@@ -24,33 +25,18 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [womansClothing, setWomansClothing] = useState<Product[]>([]);
 
   const [selectedCategory, setSelectedCategory] = useState<string>();
+  const [selectedProduct, setSelectedProduct] = useState<Product>();
 
-  const [value, setValue] = useState<number[]>([]);
-  const [highestPrice, setHighestPrice] = useState(Number);
-  const [lowestPrice, setLowestPrice] = useState(Number);
-  const [prices, setPrices] = useState<number[]>([]);
-
-  useEffect(() => {
-    setPrices(products.map((product) => product.price));
-    const max = Math.max(...prices);
-    const min = Math.min(...prices);
-    setHighestPrice(max);
-    setLowestPrice(min);
-
-    setValue([min, max]);
-  }, [products]);
-
-  // useEffect(() => {
-  //   setValue([lowestPrice, highestPrice]);
-  // }, [lowestPrice, highestPrice]);
-
-  const calcMax = () => {};
+  const [value, setValue] = useState<number[]>([0, 100]);
+  const [headerCategoryIndicator, setHeaderCategoryIndicator] =
+    useState<string>();
 
   const filteredProducts = () => {
     const priceFiltered = products.filter(
       (product) => product.price >= value[0] && product.price <= value[1]
     );
     setProducts(priceFiltered);
+    setHeaderCategoryIndicator(selectedCategory);
 
     switch (selectedCategory) {
       case "electronics":
@@ -69,8 +55,9 @@ export function ProductProvider({ children }: ProductProviderProps) {
         setProducts(womansClothing);
 
         break;
+
       default:
-        setProducts(products);
+        setProducts(allProducts);
     }
   };
 
@@ -95,15 +82,17 @@ export function ProductProvider({ children }: ProductProviderProps) {
   useEffect(() => {
     const allProducts = fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
-      .then((json) => setProducts(json));
+      .then((json) => {
+        setProducts(json);
+        setAllProducts(json);
+      });
 
     const allCategories = fetch("https://fakestoreapi.com/products/categories")
       .then((res) => res.json())
-      .then((json) => setCategories(json));
+      .then((json) => {
+        setCategories(json);
+      });
   }, []);
-
-  const getMaxPrice = () => highestPrice;
-  const getMinPrice = () => lowestPrice;
 
   const contextValue: ProductsContextType = {
     products,
@@ -116,12 +105,10 @@ export function ProductProvider({ children }: ProductProviderProps) {
     selectedCategory,
     setSelectedCategory,
     value,
-    highestPrice,
-    lowestPrice,
     setValue,
-    prices,
-    getMaxPrice,
-    getMinPrice,
+    headerCategoryIndicator,
+    selectedProduct,
+    setSelectedProduct,
   };
 
   return (

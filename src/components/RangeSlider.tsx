@@ -8,14 +8,7 @@ function valuetext(value: number) {
 }
 
 export default function RangeSlider() {
-  const {
-    value,
-    setValue,
-    highestPrice,
-    lowestPrice,
-    getMaxPrice,
-    getMinPrice,
-  } = useProductContext();
+  const { value, setValue } = useProductContext();
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
@@ -30,8 +23,6 @@ export default function RangeSlider() {
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         color="primary"
-        max={getMaxPrice()}
-        min={getMinPrice()}
       />
     </Box>
   );

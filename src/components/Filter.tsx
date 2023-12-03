@@ -20,7 +20,11 @@ const FilterButton = styled.button`
   gap: 10px;
 `;
 
-const Line = styled.div``;
+const Line = styled.div`
+  width: 100%;
+  height: 2px;
+  background-color: #e6e6e6;
+`;
 
 const Filter = () => {
   const {
@@ -33,16 +37,17 @@ const Filter = () => {
     selectedCategory,
     setSelectedCategory,
     value,
-    prices,
   } = useProductContext();
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
       <FilterButton onClick={() => filteredProducts()}>
         Filter
         <img src={FilterIcon} alt="filter icon" />
       </FilterButton>
-      <h2>All Categories</h2>
+      <h2 style={{ cursor: "pointer" }} onClick={() => setSelectedCategory("")}>
+        All Categories
+      </h2>
       {categories.map((category) => (
         <div style={{ display: "flex", gap: "10px" }}>
           <input
@@ -50,7 +55,7 @@ const Filter = () => {
             checked={selectedCategory === category}
             onChange={() => setSelectedCategory(category)}
           />
-          <p>{category}</p>
+          <p style={{ cursor: "pointer" }}>{category}</p>
           {category === "electronics" ? (
             <p>({electronics.length})</p>
           ) : category === "jewelery" ? (
@@ -72,6 +77,7 @@ const Filter = () => {
           {value[0]} - {value[1]}
         </span>
       </p>
+      <Line />
     </div>
   );
 };
