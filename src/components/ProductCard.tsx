@@ -58,7 +58,7 @@ const ProductCard = ({ product }: Props) => {
   const viewProduct = (currentProduct: Product) => {
     setSelectedProduct(currentProduct);
 
-    navigate("single-product");
+    navigate("/single-product");
   };
 
   return (

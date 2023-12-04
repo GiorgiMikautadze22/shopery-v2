@@ -49,7 +49,7 @@ const Filter = () => {
         All Categories
       </h2>
       {categories.map((category) => (
-        <div style={{ display: "flex", gap: "10px" }}>
+        <div key={category} style={{ display: "flex", gap: "10px" }}>
           <input
             type="checkbox"
             checked={selectedCategory === category}
