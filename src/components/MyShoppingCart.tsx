@@ -19,7 +19,7 @@ const MyShoppingCart = () => {
   return (
     <Wrapper>
       <MyShoppingCardTag>My Shopping Cart</MyShoppingCardTag>
-      <div style={{ display: "flex", gap: "20px" }}>
+      <div style={{ display: "flex", gap: "20px", marginTop: "32px" }}>
         <div>
           <ShoppingCartTable />
           <div>Coupon Code</div>

@@ -27,37 +27,67 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>();
   const [selectedProduct, setSelectedProduct] = useState<Product>();
 
-  const [value, setValue] = useState<number[]>([0, 100]);
+  const [value, setValue] = useState<number[]>([]);
   const [headerCategoryIndicator, setHeaderCategoryIndicator] =
     useState<string>();
 
+  const [allProductsPrices, setAllProductsPrices] = useState<number[]>([]);
+  const [maxPrice, setMaxPrice] = useState(Number);
+  const [minPrice, setMinPrice] = useState(Number);
+
+  const [myCart, setMyCart] = useState<Product[]>([]);
+
+  // useEffect(() => {
+  //   if (selectedProduct) {
+  //     setMyCart([...myCart, selectedProduct]);
+  //   }
+  //   console.log(myCart);
+  // }, [selectedProduct]);
+
+  useEffect(() => {
+    setAllProductsPrices(allProducts.map((product) => product.price));
+    setMaxPrice(Math.max(...allProductsPrices));
+    setMinPrice(Math.min(...allProductsPrices));
+    setValue([minPrice, maxPrice]);
+  }, [allProducts, maxPrice]);
+
   const filteredProducts = () => {
-    const priceFiltered = products.filter(
+    const priceFiltered = allProducts.filter(
       (product) => product.price >= value[0] && product.price <= value[1]
     );
+
     setProducts(priceFiltered);
     setHeaderCategoryIndicator(selectedCategory);
 
     switch (selectedCategory) {
       case "electronics":
-        setProducts(electronics);
+        const filteredElectronics = electronics.filter(
+          (product) => product.price >= value[0] && product.price <= value[1]
+        );
+        setProducts(filteredElectronics);
 
         break;
       case "jewelery":
-        setProducts(jewelery);
+        const filteredJewelery = jewelery.filter(
+          (product) => product.price >= value[0] && product.price <= value[1]
+        );
+        setProducts(filteredJewelery);
 
         break;
       case "men's clothing":
-        setProducts(mensClothing);
+        const filteredMensClothing = mensClothing.filter(
+          (product) => product.price >= value[0] && product.price <= value[1]
+        );
+        setProducts(filteredMensClothing);
 
         break;
       case "women's clothing":
-        setProducts(womansClothing);
+        const filteredWomensClothing = womansClothing.filter(
+          (product) => product.price >= value[0] && product.price <= value[1]
+        );
+        setProducts(filteredWomensClothing);
 
         break;
-
-      default:
-        setProducts(allProducts);
     }
   };
 
@@ -109,6 +139,10 @@ export function ProductProvider({ children }: ProductProviderProps) {
     headerCategoryIndicator,
     selectedProduct,
     setSelectedProduct,
+    maxPrice,
+    minPrice,
+    myCart,
+    setMyCart,
   };
 
   return (

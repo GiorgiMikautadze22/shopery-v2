@@ -68,8 +68,14 @@ const LikeButton = styled.div`
 `;
 
 const SingleProduct = () => {
-  const { selectedProduct } = useProductContext();
+  const { selectedProduct, myCart, setMyCart } = useProductContext();
   const navigate = useNavigate();
+  const AddToCart = () => {
+    navigate("/shopping-cart");
+    if (selectedProduct) {
+      setMyCart([...myCart, selectedProduct]);
+    }
+  };
 
   return (
     <div>
@@ -95,7 +101,7 @@ const SingleProduct = () => {
           </p>
           <Line />
           <div style={{ display: "flex", gap: "12px" }}>
-            <AddToCartButton onClick={() => navigate("/shopping-cart")}>
+            <AddToCartButton onClick={AddToCart}>
               Add to Cart
               <img src={WhiteBagIcon} alt="" />
             </AddToCartButton>

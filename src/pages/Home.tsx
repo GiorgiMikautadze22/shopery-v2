@@ -11,7 +11,7 @@ const Home = () => {
         style={{
           display: "flex",
           justifyContent: "space-evenly",
-          marginTop: "60px",
+          marginTop: "5%",
         }}
       >
         <Filter />

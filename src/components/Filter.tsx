@@ -18,6 +18,13 @@ const FilterButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+    transition: 120ms;
+    opacity: 0.7;
+  }
 `;
 
 const Line = styled.div`
@@ -50,12 +57,14 @@ const Filter = () => {
       </h2>
       {categories.map((category) => (
         <div key={category} style={{ display: "flex", gap: "10px" }}>
-          <input
-            type="checkbox"
-            checked={selectedCategory === category}
-            onChange={() => setSelectedCategory(category)}
-          />
-          <p style={{ cursor: "pointer" }}>{category}</p>
+          <label style={{ display: "flex", gap: "10px" }}>
+            <input
+              type="checkbox"
+              checked={selectedCategory === category}
+              onChange={() => setSelectedCategory(category)}
+            />
+            <p style={{ cursor: "pointer" }}>{category}</p>
+          </label>
           {category === "electronics" ? (
             <p>({electronics.length})</p>
           ) : category === "jewelery" ? (

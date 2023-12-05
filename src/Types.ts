@@ -22,4 +22,8 @@ export interface ProductsContextType {
   headerCategoryIndicator: string | undefined;
   selectedProduct: Product | undefined;
   setSelectedProduct: React.Dispatch<React.SetStateAction<Product | undefined>>;
+  maxPrice: number;
+  minPrice: number;
+  myCart: Product[];
+  setMyCart: React.Dispatch<React.SetStateAction<Product[]>>;
 }
