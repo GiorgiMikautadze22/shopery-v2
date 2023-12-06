@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import ShoppingCartTable from "./ShoppingCartTable";
+import CouponCode from "./CouponCode";
+import CartTotal from "./CartTotal";
 
 const MyShoppingCardTag = styled.h2`
   font-size: 32px;
@@ -22,9 +24,9 @@ const MyShoppingCart = () => {
       <div style={{ display: "flex", gap: "20px", marginTop: "32px" }}>
         <div>
           <ShoppingCartTable />
-          <div>Coupon Code</div>
+          <CouponCode />
         </div>
-        <div>Cart Total</div>
+        <CartTotal />
       </div>
     </Wrapper>
   );

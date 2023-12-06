@@ -21,17 +21,26 @@ const StyledHeader = styled.div`
 
 interface Props {
   selectedProduct?: Product;
+  headerShoppingCartIndicator?: string;
 }
 
-const Header = ({ selectedProduct }: Props) => {
+const Header = ({ selectedProduct, headerShoppingCartIndicator }: Props) => {
   const { headerCategoryIndicator } = useProductContext();
   return (
     <StyledHeader>
       <img style={{ width: "24px", height: "24px" }} src={HomeIcon} alt="" />
       <img style={{ width: "10px", height: "10px" }} src={ArrowIcon} alt="" />
-      <h3 style={{ color: "#999999", fontSize: "16px", fontWeight: 400 }}>
-        Categories
-      </h3>
+
+      {headerShoppingCartIndicator ? (
+        <h3 style={{ color: "#00B207", fontSize: "16px", fontWeight: 400 }}>
+          {headerShoppingCartIndicator}
+        </h3>
+      ) : (
+        <h3 style={{ color: "#999999", fontSize: "16px", fontWeight: 400 }}>
+          Categories
+        </h3>
+      )}
+
       {headerCategoryIndicator ? (
         <>
           <img

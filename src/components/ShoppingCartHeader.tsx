@@ -5,12 +5,14 @@ import ContactSection from "./ContactSection";
 import Header from "./Header";
 
 const ShoppingCartHeader = () => {
+  const headerShoppingCartIndicator = "Shopping Cart";
+
   return (
     <div>
       <LocationAndAuthentication />
       <SearchSection />
       <ContactSection />
-      <Header />
+      <Header headerShoppingCartIndicator={headerShoppingCartIndicator} />
     </div>
   );
 };

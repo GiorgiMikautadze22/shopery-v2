@@ -36,13 +36,22 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [minPrice, setMinPrice] = useState(Number);
 
   const [myCart, setMyCart] = useState<Product[]>([]);
+  const [cartTotalPrice, setCartTotalPrice] = useState(0);
 
-  // useEffect(() => {
-  //   if (selectedProduct) {
-  //     setMyCart([...myCart, selectedProduct]);
-  //   }
-  //   console.log(myCart);
-  // }, [selectedProduct]);
+  const removeFromCart = (id: number) => {
+    const filteredCart = myCart.filter((product) => product.id !== id);
+    setMyCart(filteredCart);
+  };
+
+  useEffect(() => {
+    if (myCart.length === 1) {
+      setCartTotalPrice(myCart[0].price);
+    } else {
+      myCart.map((product) => {
+        setCartTotalPrice(cartTotalPrice + product.price);
+      });
+    }
+  }, [myCart]);
 
   useEffect(() => {
     setAllProductsPrices(allProducts.map((product) => product.price));
@@ -143,6 +152,8 @@ export function ProductProvider({ children }: ProductProviderProps) {
     minPrice,
     myCart,
     setMyCart,
+    removeFromCart,
+    cartTotalPrice,
   };
 
   return (

@@ -26,4 +26,6 @@ export interface ProductsContextType {
   minPrice: number;
   myCart: Product[];
   setMyCart: React.Dispatch<React.SetStateAction<Product[]>>;
+  removeFromCart: (id: number) => void;
+  cartTotalPrice: number;
 }
