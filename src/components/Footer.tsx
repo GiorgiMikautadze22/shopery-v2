@@ -5,10 +5,10 @@ import Navigation from "./Navigation";
 import CopyWrite from "./CopyWrite";
 
 const Wrapper = styled.div`
-  margin-top: 40px;
-  background-color: #333333;
+  background-color: #1a1a1a;
   display: flex;
   align-items: center;
+  flex-direction: column;
   padding: 0px 200px;
   width: 100%;
 `;
@@ -16,8 +16,10 @@ const Wrapper = styled.div`
 const Footer = () => {
   return (
     <Wrapper>
-      <FooterContact />
-      <Navigation />
+      <div style={{ padding: "60px 0px", display: "flex", gap: "120px" }}>
+        <FooterContact />
+        <Navigation />
+      </div>
       <CopyWrite />
     </Wrapper>
   );

@@ -4,16 +4,17 @@ import SearchSection from "./SearchSection";
 import ContactSection from "./ContactSection";
 import Header from "./Header";
 
-const ShoppingCartHeader = () => {
-  const headerShoppingCartIndicator = "Shopping Cart";
+const CheckoutHeader = () => {
+  const checkoutHeaderIndicator = "Checkout";
+
   return (
     <div>
       <LocationAndAuthentication />
       <SearchSection />
       <ContactSection />
-      <Header headerShoppingCartIndicator={headerShoppingCartIndicator} />
+      <Header checkoutHeaderIndicator={checkoutHeaderIndicator} />
     </div>
   );
 };
 
-export default ShoppingCartHeader;
+export default CheckoutHeader;
