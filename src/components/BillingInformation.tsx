@@ -18,6 +18,15 @@ const Flex = styled.div`
     border-radius: 6px;
     border: 1px solid #e6e6e6;
   }
+
+  select {
+    width: 280px;
+    height: 50px;
+    padding-left: 16px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #e6e6e6;
+  }
 `;
 
 const StreetAddress = styled.div`
@@ -79,11 +88,19 @@ const BillingInformation = () => {
       <Flex>
         <div>
           <p>Country / Region</p>
-          <input type="text" placeholder="Select" />
+          <select>
+            <option>Select Country</option>
+            <option value="country1">Country 1</option>
+            <option value="country2">Country 2</option>
+          </select>
         </div>
         <div>
           <p>States</p>
-          <input type="text" placeholder="Selects" />
+          <select>
+            <option>Select State</option>
+            <option value="state1">State 1</option>
+            <option value="state2">State 2</option>
+          </select>
         </div>
         <div>
           <p>Zip Code</p>
@@ -109,7 +126,13 @@ const BillingInformation = () => {
         </div>
       </Flex>
       <Checkbox>
-        <input type="checkbox" />
+        <input
+          style={{
+            width: "20px",
+            height: "20px",
+          }}
+          type="checkbox"
+        />
         <p>Ship to a different address</p>
       </Checkbox>
     </Wrapper>

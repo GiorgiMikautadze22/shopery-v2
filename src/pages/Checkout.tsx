@@ -5,11 +5,12 @@ import AdditionalInfo from "../components/AdditionalInfo";
 import OrderSummery from "../components/OrderSummery";
 import Footer from "../components/Footer";
 import Subscription from "../components/Subscription";
+import CheckoutHeader from "../components/CheckoutHeader";
 
 const Checkout = () => {
   return (
     <div>
-      <ShoppingCartHeader />
+      <CheckoutHeader />
       <div
         style={{
           display: "flex",

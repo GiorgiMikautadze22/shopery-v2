@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import ColorRadioButtons from "./Checkbox";
+import { useProductContext } from "../Context";
 
 const Wrapper = styled.div`
   padding: 24px;
@@ -28,13 +30,9 @@ const Payments = styled.div`
 
 const PaymentMethod = styled.div`
   margin-top: 16px;
-  display: flex;
-  flex-direction: column;
   margin-bottom: 24px;
-  gap: 10px;
   div {
     display: flex;
-    gap: 10px;
   }
   p {
     font-size: 14px;
@@ -59,13 +57,41 @@ const OrderButton = styled.button`
 `;
 
 const OrderSummery = () => {
+  const { myCart, cartTotalPrice } = useProductContext();
+
   return (
     <Wrapper>
       <h3>Order Summery</h3>
-      <div></div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        {myCart.map((product) => (
+          <div
+            key={product.id}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              borderBottom: "1px solid #CCCCCC",
+              paddingBottom: "10px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <img
+                style={{ width: "80px", height: "80px", objectFit: "contain" }}
+                src={product.image}
+                alt=""
+              />
+              <p style={{ fontSize: "14px", maxWidth: "170px" }}>
+                {product.title.split(" ").splice(0, 3).join(" ")}
+              </p>
+              <h5>x{product.quantity}</h5>
+            </div>
+            <h5>${product.price}</h5>
+          </div>
+        ))}
+      </div>
       <Payments>
         <p>Subtotal:</p>
-        <h5>$84.00</h5>
+        <h5>${cartTotalPrice}</h5>
       </Payments>
       <Payments>
         <p>Shipping:</p>
@@ -73,22 +99,11 @@ const OrderSummery = () => {
       </Payments>
       <Payments style={{ border: "none" }}>
         <p style={{ fontSize: "16px" }}>Total:</p>
-        <h5 style={{ fontSize: "16px" }}>$84.00</h5>
+        <h5 style={{ fontSize: "16px" }}>${cartTotalPrice}</h5>
       </Payments>
       <h3>Payment Method</h3>
       <PaymentMethod>
-        <div>
-          <input type="checkbox" />
-          <p>Cash on Delivery</p>
-        </div>
-        <div>
-          <input type="checkbox" />
-          <p>Paypal</p>
-        </div>
-        <div>
-          <input type="checkbox" />
-          <p>Amazon Pay</p>
-        </div>
+        <ColorRadioButtons />
       </PaymentMethod>
       <OrderButton>Place Order</OrderButton>
     </Wrapper>

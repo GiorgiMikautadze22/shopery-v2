@@ -36,21 +36,27 @@ const Header = ({
       <img style={{ width: "24px", height: "24px" }} src={HomeIcon} alt="" />
       <img style={{ width: "10px", height: "10px" }} src={ArrowIcon} alt="" />
 
+      {headerShoppingCartIndicator ? (
+        <h3 style={{ color: "#00B207", fontSize: "16px", fontWeight: 400 }}>
+          {headerShoppingCartIndicator}
+        </h3>
+      ) : null}
       {checkoutHeaderIndicator ? (
-        <h3 style={{ color: "#00B207", fontSize: "16px", fontWeight: 400 }}>
-          {checkoutHeaderIndicator}
-        </h3>
-      ) : (
-        <h3 style={{ color: "#00B207", fontSize: "16px", fontWeight: 400 }}>
-          {headerShoppingCartIndicator}
-        </h3>
-      )}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <h3 style={{ color: "#999999", fontSize: "16px", fontWeight: 400 }}>
+            Shopping Cart
+          </h3>
+          <img
+            style={{ width: "10px", height: "10px" }}
+            src={ArrowIcon}
+            alt=""
+          />
 
-      {/* {headerShoppingCartIndicator ? (
-        <h3 style={{ color: "#00B207", fontSize: "16px", fontWeight: 400 }}>
-          {headerShoppingCartIndicator}
-        </h3>
-      ) : null} */}
+          <h3 style={{ color: "#00B207", fontSize: "16px", fontWeight: 400 }}>
+            {checkoutHeaderIndicator}
+          </h3>
+        </div>
+      ) : null}
 
       {headerCategoryIndicator ? (
         <>

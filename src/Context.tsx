@@ -43,15 +43,17 @@ export function ProductProvider({ children }: ProductProviderProps) {
     setMyCart(filteredCart);
   };
 
-  useEffect(() => {
-    if (myCart.length === 1) {
-      setCartTotalPrice(myCart[0].price);
-    } else {
-      myCart.map((product) => {
-        setCartTotalPrice(cartTotalPrice + product.price);
-      });
-    }
-  }, [myCart]);
+  // useEffect(() => {
+  //   if (myCart.length === 1) {
+  //     setCartTotalPrice(myCart[0].price);
+  //   } else {
+  //     myCart.map((product) => {
+  //       const sum = product.price * product.quantity;
+  //       setCartTotalPrice(cartTotalPrice + sum);
+  //       console.log("test");
+  //     });
+  //   }
+  // }, [myCart]);
 
   useEffect(() => {
     setAllProductsPrices(allProducts.map((product) => product.price));
@@ -154,6 +156,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
     setMyCart,
     removeFromCart,
     cartTotalPrice,
+    setCartTotalPrice,
   };
 
   return (

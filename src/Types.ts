@@ -5,6 +5,7 @@ export interface Product {
   image: string;
   category: string;
   price: number;
+  quantity: number;
 }
 
 export interface ProductsContextType {
@@ -28,4 +29,5 @@ export interface ProductsContextType {
   setMyCart: React.Dispatch<React.SetStateAction<Product[]>>;
   removeFromCart: (id: number) => void;
   cartTotalPrice: number;
+  setCartTotalPrice: React.Dispatch<React.SetStateAction<number>>;
 }

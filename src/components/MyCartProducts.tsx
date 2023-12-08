@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Product } from "../Types";
 import { useProductContext } from "../Context";
@@ -86,7 +86,37 @@ interface Props {
 const MyCartProducts = ({ product }: Props) => {
   const [quantity, setQuantity] = useState(1);
 
-  const { selectedProduct, removeFromCart } = useProductContext();
+  const {
+    selectedProduct,
+    removeFromCart,
+    setCartTotalPrice,
+    myCart,
+    cartTotalPrice,
+  } = useProductContext();
+
+  useEffect(() => {
+    product.quantity = quantity;
+  }, [quantity]);
+
+  useEffect(() => {
+    const sum = product.price * product.quantity;
+
+    if (myCart.length === 1) {
+      setCartTotalPrice(sum);
+    } else {
+      setCartTotalPrice(cartTotalPrice + product.price);
+    }
+  }, [myCart]);
+
+  const increase = () => {
+    setQuantity(quantity + 1);
+    setCartTotalPrice(cartTotalPrice + product.price);
+  };
+
+  const decrease = () => {
+    setQuantity(quantity - 1);
+    setCartTotalPrice(cartTotalPrice - product.price);
+  };
 
   return (
     <ShoppingCardProducts key={product.id}>
@@ -112,16 +142,10 @@ const MyCartProducts = ({ product }: Props) => {
       <QuantityIndicator>
         <Minus
           quantity={quantity}
-          onClick={
-            quantity !== 1
-              ? ((() =>
-                  setQuantity(
-                    quantity - 1
-                  )) as React.MouseEventHandler<HTMLDivElement>)
-              : undefined
-          }
+          onClick={quantity !== 1 ? () => decrease() : undefined}
         />
-        {quantity} <Plus onClick={() => setQuantity(quantity + 1)} />
+        {quantity}
+        <Plus onClick={() => increase()} />
       </QuantityIndicator>
       {selectedProduct ? (
         <p
@@ -136,12 +160,7 @@ const MyCartProducts = ({ product }: Props) => {
           ${quantity * product.price}
         </p>
       ) : null}
-      {/* <img
-        style={{ marginLeft: "50px" }}
-        src={CloseIcon}
-        alt=""
-        onClick={() => removeFromCart(product.id)}
-      /> */}
+
       <RemoveFromCartButton onClick={() => removeFromCart(product.id)} />
     </ShoppingCardProducts>
   );

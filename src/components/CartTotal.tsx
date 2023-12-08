@@ -55,7 +55,7 @@ const CartTotal = () => {
       <h3 style={{ fontSize: "20px", marginBottom: "7px" }}>Cart Total</h3>
       <Fees>
         <p>Subtotal:</p>
-        <span>${cartTotalPrice}</span>
+        <span>${cartTotalPrice.toFixed(2)}</span>
       </Fees>
       <Fees>
         <p>Shipping:</p>
@@ -63,7 +63,7 @@ const CartTotal = () => {
       </Fees>
       <Fees style={{ border: "none" }}>
         <p>Total:</p>
-        <span>${cartTotalPrice}</span>
+        <span>${cartTotalPrice.toFixed(2)}</span>
       </Fees>
       <CheckoutButton onClick={() => navigate("/checkout")}>
         Proceed to checkout
