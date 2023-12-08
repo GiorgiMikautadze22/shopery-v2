@@ -60,6 +60,9 @@ const Header = ({
 
       {headerCategoryIndicator ? (
         <>
+          <h3 style={{ color: "#999999", fontSize: "16px", fontWeight: 400 }}>
+            Categories
+          </h3>
           <img
             style={{ width: "10px", height: "10px" }}
             src={ArrowIcon}
